@@ -1,6 +1,3 @@
-import hashlib
-import platform
-import random
 import string
 import time
 import requests
@@ -12,12 +9,6 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 geckopath = "./geckodriver.exe"
-
-
-generated = 0
-
-
-
 
 def Bot():
 
