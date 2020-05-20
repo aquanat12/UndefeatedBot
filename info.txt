@@ -1,0 +1,16 @@
+first name: nigel
+last name: test
+number: 202-555-0183
+address: test street
+city: ALCESTER
+zip: 57001
+color: BLACK
+size: L
+location: US
+state: SD
+Login: mail@gmail.com
+Password: Password
+cc: 3543-0829-6052-0376
+ed: 02/22
+cvv: 5555
+ccname: nigel

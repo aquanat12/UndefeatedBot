@@ -18,30 +18,36 @@ geckopath = "./geckodriver.exe"
 
 
 def Bot():
+    
+    link = input("Paste Link: ")
 
-    
+
+    row = []
     # info = ["first name", "last name", "number", "address", "city", "zip", "color", "size", "location", "state", "Login", "Password", "cc", "ed", "cvv", "ccname"]
-    df = pd.read_csv("info.csv")
-    first = str(df["first name"]).strip(" 0").replace("Name: first name, dtype: object", '').strip("\n").strip("\n")
-    last = str(df["last name"]).strip(" 0").replace("Name: last name, dtype: object", '').strip("\n")
-    number = str(df["number"]).strip(" 0").replace("Name: number, dtype: object", '').strip("\n")
-    address = str(df["address"]).strip(" 0").replace("Name: address, dtype: object", '').strip("\n")
-    city = str(df["city"]).strip(" 0").replace("Name: city, dtype: object", '').strip("\n")
-    zip = str(df["zip"]).strip(" 0").replace("Name: zip, dtype: object", '').strip("\n")
-    color = str(df["color"]).strip(" 0").replace("Name: color, dtype: object", '').strip("\n")
-    size = str(df["size"]).strip(" 0").replace("Name: size, dtype: object", '').strip("\n")
-    loc = str(df["location"]).strip(" 0").replace("Name: location, dtype: object", '').strip("\n")
-    state = str(df["state"]).strip(" 0").replace("Name: state, dtype: object", '').strip("\n")
-    uid = str(df["Login"]).strip(" 0").replace("Name: Login, dtype: object", '').strip("\n")
-    upw = str(df["Password"]).strip(" 0").replace("Name: Password, dtype: object", '').strip("\n")
-    cc = str(df["cc"]).strip(" 0").replace("Name: cc, dtype: object", '').strip("\n")
-    ed = str(df["ed"]).strip(" 0").replace("Name: ed, dtype: object", '').strip("\n")
-    cvv = str(df["cvv"]).strip(" 0").replace("Name: cvv, dtype: object", '').strip("\n")
-    ccname = str(df["ccname"]).strip(" 0").replace("Name: ccname, dtype: object", '').strip("\n")
+    with open("info.txt", "r") as info:
+        for line in info:
+            row.append(line)
+        first = row[0].replace("first name: ", '').strip("\n")
+        last = row[1].replace("last name: ", '').strip("\n")
+        number = row[2].replace("number: ", '').strip("\n")
+        address = row[3].replace("address: ", '').strip("\n")
+        city = row[4].replace("city: ", '').strip("\n")
+        zip = row[5].replace("zip: ", '').strip("\n")
+        color = row[6].replace("color: ", '').strip("\n")
+        size = row[7].replace("size: ", '').strip("\n")
+        loc = row[8].replace("location: ", '').strip("\n")
+        state = row[9].replace("state: ", '').strip("\n")
+        uid = row[10].replace("Login: ", '').strip("\n")
+        upw = row[11].replace("Password: ", '').strip("\n")
+        cc = row[12].replace("cc: ", '').replace("-", '').strip("\n")
+        ed = row[13].replace("ed: ", '').strip("\n")
+        cvv = row[14].replace("cvv: ", '').strip("\n")
+        ccname = row[15].replace("ccname: ", '').strip("\n")
     
+    print(cc)
 
     driver = webdriver.Firefox(executable_path=geckopath)
-    driver.get("https://undefeated.com/collections/all/products/undefeated-racquet-s-s-tee?variant=31341463830601")
+    driver.get(link)
 
     ChangeShipping = WebDriverWait(driver, 60).until(
         EC.element_to_be_clickable((By.XPATH, "/html/body/div[6]/div/div/div/div/div/div[2]/div[3]/a"))
@@ -163,7 +169,7 @@ def Bot():
 
     # Page 3
     
-    time.sleep(3)
+    time.sleep(0.1)
     
     for i in range(8):
         pyautogui.press('tab')
@@ -182,6 +188,10 @@ def Bot():
     pyautogui.press('tab')
     pyautogui.write(cvv)
     
+    pay = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, 'continue_button'))
+    )
+    pay.click()
 
     print("\n\n[*] Bought!")
 
